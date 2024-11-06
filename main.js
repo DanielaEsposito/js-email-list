@@ -1,31 +1,24 @@
 //console.log("js ok");
 const emails =document.getElementById("list")
-const generateListBtn =document.getElementById("add-list")
+const generateListBtn =document.getElementById("add-btn")
 
-for(let i =0; i < 10 ; i++){
-    fetch(`https://flynn.boolean.careers/exercises/api/random/mail`)
-    .then((response) => response.json() )
-    .then((data) => {
-        const singleEmail = data.response;
-        emails.innerHTML += `<a href="#" class=" list-group-item list-group-item-action text-center">${singleEmail}</a>`;
-        
-    })
-    
+
+function generate(){
+    for(let i =0; i < 10 ; i++){
+        fetch(`https://flynn.boolean.careers/exercises/api/random/mail`)
+        .then((response) => response.json() )
+        .then((data) => {
+            const singleEmail = data.response;
+            emails.innerHTML += `<a href="#" class=" list-group-item list-group-item-action text-center">${singleEmail}</a>`;
+            
+        })   
+    }
 }
+let startEmail = generate();
 
 
-//function generateNewEmailList (num){
-    //for(let i =0; i < num ; i++){
-       // const singleEmail="";
-        //fetch(`https://flynn.boolean.careers/exercises/api/random/mail`)
-        //.then((response) => response.json() )
-        //.then((data) => {
-             //singleEmail = data.response;
-        
-        //})  
-    //}
-    
-//}
-
-//let esempio = generateNewEmailList(5);
-//console.log(esempio);
+generateListBtn.addEventListener("click" ,(event) =>{
+    emails.innerHTML="";
+    emails.innerHTML= `<div  class="list-group-item list-group-item-action text-center fw-bold">My e-mail list</div>`
+    generate();
+});
